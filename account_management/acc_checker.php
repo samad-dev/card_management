@@ -1,6 +1,6 @@
 <?php
 include("../db.php"); // Database connection
-header('Content-Type: application/json'); // JSON Response
+include("../header.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!isset($_GET['acc_no']) || empty($_GET['acc_no'])) {

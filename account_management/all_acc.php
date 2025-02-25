@@ -1,6 +1,6 @@
 <?php
 include("../db.php"); // Database connection
-header('Content-Type: application/json'); // JSON Response
+include("../header.php");
 
 // 🔍 Fetch All Records
 $query = "SELECT * FROM acc_entry";
