@@ -1,6 +1,6 @@
 <?php
 include("../db.php"); // Database connection
-include("../header.php");
+include("../header.php"); // Database connection
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($_POST['id']) || empty($_POST['id'])) {
@@ -11,58 +11,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $id = mysqli_real_escape_string($db, $_POST['id']);
     $fields = [];
-    
-    if (!empty($_POST['company_code'])) {
-        $company_code = mysqli_real_escape_string($db, $_POST['company_code']);
-        $fields[] = "company_code='$company_code'";
-    }
-    if (!empty($_POST['company_name'])) {
-        $company_name = mysqli_real_escape_string($db, $_POST['company_name']);
-        $fields[] = "company_name='$company_name'";
-    }
-    if (!empty($_POST['address'])) {
-        $address = mysqli_real_escape_string($db, $_POST['address']);
-        $fields[] = "address='$address'";
-    }
-    if (!empty($_POST['city'])) {
-        $city = mysqli_real_escape_string($db, $_POST['city']);
-        $fields[] = "city='$city'";
-    }
-    if (!empty($_POST['sales_tax'])) {
-        $sales_tax = mysqli_real_escape_string($db, $_POST['sales_tax']);
-        $fields[] = "sales_tax='$sales_tax'";
-    }
-    if (!empty($_POST['ntn'])) {
-        $ntn = mysqli_real_escape_string($db, $_POST['ntn']);
-        $fields[] = "ntn='$ntn'";
+
+    // Loop through fields and add only non-empty ones to update query
+    foreach ($_POST as $key => $value) {
+        if ($key !== 'id' && !empty($value)) {
+            $safe_value = mysqli_real_escape_string($db, $value);
+            $fields[] = "$key='$safe_value'";
+        }
     }
 
     if (count($fields) == 0) {
         http_response_code(400);
         echo json_encode(['status' => 'error', 'message' => 'No fields to update']);
         exit;
-    }
-
-    // ✅ Dynamic Duplicate Check (Only if relevant fields exist)
-    $dup_conditions = [];
-    if (isset($company_code)) {
-        $dup_conditions[] = "company_code='$company_code'";
-    }
-    if (isset($company_name)) {
-        $dup_conditions[] = "company_name='$company_name'";
-    }
-    if (isset($ntn)) {
-        $dup_conditions[] = "ntn='$ntn'";
-    }
-
-    if (!empty($dup_conditions)) {
-        $dup_check = "SELECT * FROM comp_info WHERE (" . implode(" OR ", $dup_conditions) . ") AND id != '$id'";
-        $dup_result = $db->query($dup_check);
-        if ($dup_result->num_rows > 0) {
-            http_response_code(409);
-            echo json_encode(['status' => 'error', 'message' => 'Company Code, Name, or NTN already exists']);
-            exit;
-        }
     }
 
     // 🔄 Update Query
@@ -76,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode(['status' => 'error', 'message' => 'Database update error']);
     }
 } else {
-    http_response_code(400);
+    http_response_code(405);
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }
 ?>
