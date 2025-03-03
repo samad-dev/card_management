@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         http_response_code(201);
         echo json_encode(['status' => 'success', 'message' => 'Company created successfully']);
     } else {
-        http_response_code(400);
+        http_response_code(500);
         echo json_encode(['status' => 'error', 'message' => 'Database insert error']);
     }
 } else {

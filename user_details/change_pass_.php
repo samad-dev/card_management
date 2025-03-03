@@ -4,6 +4,9 @@ include("../header.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // ✅ Use `$_POST` instead of JSON input
+   
+var_dump($_POST);
+exit;
     if (!isset($_POST['id']) || empty($_POST['id'])) {
         http_response_code(400);
         echo json_encode(['status' => 'error', 'message' => 'Missing required field: id']);
@@ -24,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
+    
 
     if ($result->num_rows == 0) {
         http_response_code(404);
