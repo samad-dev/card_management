@@ -3,7 +3,7 @@ include("../db.php"); // Database connection
 include("../header.php"); // Header file (if needed)
 
 // 🔍 Fetch Only selec_comp (assuming it's company_code from comp_info)
-$query = "SELECT * AS selec_comp FROM comp_info";
+$query = "SELECT * FROM comp_info";
 $result = $db->query($query);
 
 if ($result->num_rows > 0) {
