@@ -3,7 +3,7 @@ include("../db.php"); // Database connection
 include("../header.php");
 
 // 🔍 Fetch All Records
-$query = "SELECT * FROM batch_manag";
+$query = "SELECT bm.*,ct.card_name,pt.plastic_name FROM `batch_manag` bm join card_types ct on ct.card_type_id = bm.card_type_id join plastic_types pt on pt.plastic_type_id = bm.plastic_type_id;";
 $result = $db->query($query);
 
 if ($result->num_rows > 0) {
