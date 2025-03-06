@@ -1,6 +1,6 @@
 <?php
 include("../db.php"); // Ensure database connection
-
+include("../header.php");
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['company_id']) && is_numeric($_GET['company_id'])) {
