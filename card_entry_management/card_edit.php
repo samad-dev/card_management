@@ -75,8 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             updated_at = NOW()
         WHERE
             card = '$card'; -- Assuming 'card' is a unique identifier. Replace with your actual unique key.";
-        // print_r($_POST);
-        // exit;
+       
         if ($db->query($query)) {
             http_response_code(200);
             echo json_encode(['status' => 'success', 'message' => 'Card entry updated successfully']);
