@@ -1,6 +1,6 @@
 <?php
 include("../db.php"); // Database connection
-header('Content-Type: application/json'); // JSON Response
+include("../header.php"); // JSON Response
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // ✅ Check if required fields are provided

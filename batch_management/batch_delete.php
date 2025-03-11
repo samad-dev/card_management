@@ -1,6 +1,6 @@
 <?php
 include("../db.php"); // Database connection
-header('Content-Type: application/json');
+include("../header.php");
 
 // ✅ Check if request method is POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

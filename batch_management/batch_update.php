@@ -1,6 +1,7 @@
 <?php
 include("../db.php"); // Database connection
-header('Content-Type: application/json');
+include("../header.php"); // Database connection
+// include("../header.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // ✅ Required fields for update
