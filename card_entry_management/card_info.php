@@ -1,6 +1,6 @@
 <?php
 include("../db.php"); // Database connection
-include("../header.php"); // JSON Response
+include("../header.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // ✅ Check if 'card' is provided
