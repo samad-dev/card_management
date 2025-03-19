@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt = $db->prepare($query);
     $stmt->bind_param(
-        "iissssssssssssssssssiiis", 
+        "iisssssssssssssssssssiis", 
         $acc_no, $comp_info_id, $legal_name, $comp_name_card, $entity, 
         $buisness_type, $address, $address_2, $city, $phone_1, $phone_2, $mobile, $email, $fax, 
         $person_name, $designation, $ntn, $sales_tax, $authorize_signatory, $auth_design, 
